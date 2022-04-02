@@ -42,17 +42,8 @@ export default function App(): JSX.Element {
   /*
   async function readGreet(){
     const address = connector.accounts[0];
-    console.log(address);*/
-    /*
-    const data = web3.eth.abi.encodeFunctionSignature({
-      name: 'greet',
-      type: 'function',
-  })
+    console.log(address);
 
-    const greeting = await web3.eth.call({
-      from: connector.accounts[0],
-      data: */
-/*
     const contract = new web3.eth.Contract(greeterInfo.abi as AbiItem[], greeterInfo.address);
     const greeting = await contract.methods.greet.call( function(err, res){
       console.log(res)
