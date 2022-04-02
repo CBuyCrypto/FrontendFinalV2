@@ -16,20 +16,6 @@ const styles = StyleSheet.create({
   white: { backgroundColor: 'white' },
 });
 
-const shouldDeployContract = async (web3, abi, data, from: string) => {
-  const deployment = new web3.eth.Contract(abi).deploy({ data });
-  const gas = await deployment.estimateGas();
-  const {
-    options: { address: contractAddress },
-  } = await deployment.send({ from, gas });
-  return new web3.eth.Contract(abi, contractAddress);
-};
-
-const greeterContract = async (web3, abi) => {
-  const greeterContract = new web3.eth.Contract(abi);
-  return greeterContract;
-}
-
 export default function App(): JSX.Element {
   const connector = useWalletConnect();
   const [message, setMessage] = React.useState<string>('Loading...');
@@ -39,19 +25,17 @@ export default function App(): JSX.Element {
     []
   );
 
-  /*
+  
   async function readGreet(){
     const address = connector.accounts[0];
     console.log(address);
 
     const contract = new web3.eth.Contract(greeterInfo.abi as AbiItem[], greeterInfo.address);
-    const greeting = await contract.methods.greet.call( function(err, res){
-      console.log(res)
-    });
+    const greeting = await contract.methods.greet().call();
 
     console.log(greeting);
     setMessage(greeting);
-  }*/
+  }
 
   async function setGreet(){
     const address = connector.accounts[0];
@@ -63,7 +47,7 @@ export default function App(): JSX.Element {
           type: 'string',
           name: '_greeting'
       }]
-    }, ["Hello Testing!!!"]);
+    }, ["Write wahtever Mesage"]);
 
     const estimatedGas = await web3.eth.estimateGas({
       from: address,
